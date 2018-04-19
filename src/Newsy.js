@@ -2,7 +2,8 @@ import "glamor/reset";
 import React, { Component } from "react";
 import { css } from "glamor";
 import { getPublicationKind } from "./utils/api";
-import Grid from "./components/Grid/Grid";
+import { StyledNewsy, StyledTitle } from "./Newsy.glamorous";
+import ArticleGrid from "./components/ArticleGrid/ArticleGrid";
 import Headline from "./components/Headline/Headline";
 import Article from "./components/Article/Article";
 import Loading from "./components/Loading/Loading";
@@ -44,13 +45,13 @@ class Newsy extends Component {
     }
 
     return (
-      <div>
-        <h1>Newsy - for news</h1>
-        <Grid>
-          <Headline content={headline} />
+      <StyledNewsy>
+        <StyledTitle>Newsy</StyledTitle>
+        <Headline content={headline} />
+        <ArticleGrid>
           {articles.map(doc => <Article key={doc.id} content={doc} />)}
-        </Grid>
-      </div>
+        </ArticleGrid>
+      </StyledNewsy>
     );
   }
 }

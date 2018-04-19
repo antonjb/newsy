@@ -1,13 +1,17 @@
 import glamorous from "glamorous";
 import { mediaQueries } from "../../styling/media_queries";
 
-const Grid = glamorous.div({
+const ArticleGrid = glamorous.div({
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
+  gridColumn: "container",
+  gridTemplateColumns: "1fr",
   gridGap: "0.5rem",
   [mediaQueries.sm]: {
+    gridTemplateColumns: "repeat(2, 1fr)",
+  },
+  [mediaQueries.md]: {
     gridTemplateColumns: "repeat(3, 1fr)",
   },
 });
 
-export default Grid;
+export default ArticleGrid;
