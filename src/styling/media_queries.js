@@ -4,7 +4,7 @@ export const breakpoints = {
   lg: 1024,
 };
 
-export const mediaQueries = {
+export const minWidth = {
   sm: `@media only screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media only screen and (min-width: ${breakpoints.md}px)`,
 };

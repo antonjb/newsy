@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import {
   StyledHeadline,
@@ -9,27 +9,46 @@ import {
   StyledTopic,
 } from "./Headline.glamorous";
 
-const Headline = ({ content }) => {
-  const titleId = `title-${content.id}`;
+function HeadlineWrapper({ href, labelledby, children }) {
+  return href ? (
+    <StyledHeadlineAnchor href={href} aria-labelledby={labelledby}>
+      {children}
+    </StyledHeadlineAnchor>
+  ) : (
+    <Fragment>{children}</Fragment>
+  );
+}
+
+const Headline = ({ id, heading, image, topic, headKicker, alt, href }) => {
+  const titleId = `title-${id}`;
 
   return (
     <StyledHeadline>
-      <StyledHeadlineAnchor href={content.slug} aria-labelledby={titleId}>
-        <StyledHeadlineImage src={content.mainImage.reference} alt="" />
+      <HeadlineWrapper href={href} aria-labelledby={titleId}>
+        <StyledHeadlineImage src={image} alt={alt} />
         <StyledHeadKicker className="bgHover" id={titleId}>
-          {content.headKicker}
+          {headKicker}
         </StyledHeadKicker>
-        <StyledSubHeading className="bgHover">
-          {content.heading}
-        </StyledSubHeading>
-        <StyledTopic>{content.primaryTopic}</StyledTopic>
-      </StyledHeadlineAnchor>
+        <StyledSubHeading className="bgHover">{heading}</StyledSubHeading>
+        <StyledTopic>{topic.id}</StyledTopic>
+      </HeadlineWrapper>
     </StyledHeadline>
   );
 };
 
 Headline.propTypes = {
-  content: PropTypes.object,
+  id: PropTypes.string.isRequired,
+  heading: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  topic: PropTypes.object.isRequired,
+  headKicker: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+  href: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+};
+
+Headline.defaultProps = {
+  alt: "",
+  href: false,
 };
 
 export default Headline;

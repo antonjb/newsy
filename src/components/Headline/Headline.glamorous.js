@@ -1,43 +1,47 @@
 import glamorous from "glamorous";
 import { rhythm } from "../../styling/typography";
-import { mediaQueries } from "../../styling/media_queries";
-import { dark, light, primary } from "../../styling/colors";
+import { GridFull } from "../../styling/grid";
+import { minWidth } from "../../styling/media_queries";
+import { dark, light } from "../../styling/colors";
 
-export const StyledHeadline = glamorous.article({
-  gridColumn: "1 / -1",
+export const StyledHeadline = glamorous.article(GridFull, {
   marginBottom: rhythm(1),
-});
-
-export const StyledHeadlineAnchor = glamorous.a({
   display: "grid",
   gridTemplateAreas: `
     "heading"
     "image"
-    "subHeading";
+    "subHeading"
   `,
-  textDecoration: "none",
-  [mediaQueries.sm]: {
+  [minWidth.sm]: {
     gridGap: rhythm(0.25),
     gridTemplateAreas: `
       "... ... ... ..."
       "... heading subHeading subHeading"
       "... ... subHeading subHeading"
       "... ... topic ..."
-      "... ... ... ...";
+      "... ... ... ..."
     `,
+    "&:hover .bgHover, &:focus .bgHover": {
+      transform: "translateY(-2px)",
+    },
   },
   "& .bgHover": {
     transition: "transform 0.1s ease-in",
   },
-  "&:hover .bgHover, &:focus .bgHover": {
-    transform: "translateY(-2px)",
-  },
+});
+
+export const StyledHeadlineAnchor = glamorous.a({
+  display: "contents",
+  textDecoration: "none",
 });
 
 export const StyledHeadlineImage = glamorous.img({
   gridArea: "image",
+  width: "100%",
+  maxHeight: "60vh",
+  objectFit: "cover",
   margin: 0,
-  [mediaQueries.sm]: {
+  [minWidth.sm]: {
     gridArea: "1 / 1 / -1 / -1",
   },
 });
@@ -66,7 +70,7 @@ export const StyledTopic = glamorous.span({
   padding: rhythm(0.25),
   color: dark,
   backgroundColor: light,
-  [mediaQueries.sm]: {
+  [minWidth.sm]: {
     display: "block",
   },
 });

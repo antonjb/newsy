@@ -1,15 +1,16 @@
 import glamorous from "glamorous";
-import { mediaQueries } from "../../styling/media_queries";
+import { MediaQueries, Grid } from "../../styling";
 
-const ArticleGrid = glamorous.div({
+const ArticleGrid = glamorous.div(Grid.GridContainer, {
   display: "grid",
-  gridColumn: "container",
   gridTemplateColumns: "1fr",
   gridGap: "0.5rem",
-  [mediaQueries.sm]: {
+  maxWidth: MediaQueries.breakpoints.lg,
+  margin: "0 auto",
+  [MediaQueries.minWidth.sm]: {
     gridTemplateColumns: "repeat(2, 1fr)",
   },
-  [mediaQueries.md]: {
+  [MediaQueries.minWidth.md]: {
     gridTemplateColumns: "repeat(3, 1fr)",
   },
 });
